@@ -69,4 +69,13 @@ const generateJWT = (id) =>{
     return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '20d'})
 }
 
+//get all members
+router.get("/members", asyncHandler(async(req, res) => {
+  try {
+    const all = await users.find({})
+    res.status(200).json(all)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}))
 module.exports = router
