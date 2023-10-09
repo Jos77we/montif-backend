@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/Server.js",
-    "server": "nodemon backend/Server.js"
+    "server": "nodemon backend/Server.js",
+    "build": "npm install"
   },
   "author": "Joseph",
   "license": "MIT",
