@@ -78,4 +78,24 @@ router.get("/members", asyncHandler(async(req, res) => {
     res.status(400).json(error)
   }
 }))
+
+//login
+router.post("/login", asyncHandler(async(req, res) =>{
+  try {
+    const {name, email, password} = req.body
+    if(!name || !email || !password){
+        res.status(400).json({message:"Please enter fields"})
+    }
+    const userLogged = await users.findOne({email})
+    if(userLogged){
+      res.status(200).json({message:"Logged in successfully"})
+    }else{
+      res.status(400).json({message:"Something is wrong"})
+    }
+
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}))
+
 module.exports = router
