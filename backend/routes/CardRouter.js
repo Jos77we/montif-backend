@@ -48,4 +48,19 @@ router.get("/cards", asyncHandler(async(req, res) => {
     
 }))
 
+router.get("/card-owner", asyncHandler(async(req, res) =>{
+    const {idNo} = req.query
+    try {
+        const owner = await card.findOne({idNo: {$in: idNo}})
+        if(owner){
+            res.status(200).json({cardNo: owner.cardNo, cardType: owner.cardType})
+
+        }else{
+            res.status(400).json({message: "Error occured"})
+        }
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}))
+
 module.exports = router

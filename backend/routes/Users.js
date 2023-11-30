@@ -88,11 +88,26 @@ router.post("/login", asyncHandler(async(req, res) =>{
     }
     const userLogged = await users.findOne({email})
     if(userLogged){
-      res.status(200).json({message:"Logged in successfully"})
+    
+      res.status(200).json({name: userLogged.name, idNo: userLogged.idNo, message:"Logged in successfully"})
     }else{
       res.status(400).json({message:"Something is wrong"})
     }
 
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}))
+
+router.get("/logged-user", asyncHandler(async(req, res) =>{
+  const {idNo} = req.query
+  try {
+    const details = await users.findOne({idNo: {$in: idNo}})
+    if(details){
+      res.status(200).json({name: details.name, email: details.email})
+    }else{
+      res.status(400).json({message: "Error occured"})
+    }
   } catch (error) {
     res.status(400).json(error)
   }
