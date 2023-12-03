@@ -65,5 +65,21 @@ router.get("/account-type", asyncHandler(async(req, res) =>{
     }
 }))
 
+router.get("/account-details", asyncHandler(async(req, res) =>{
+    const {idNo} = req.query
+
+    try {
+        const type = await account.findOne({idNo: {$in: idNo}})
+
+        if(type){
+            res.status(200).json({accountName: type.accountName, accountNo: type.accountNo, amount: type.amount, status: type.status, cardNo: type.cardNo, lastDeposit: type.depositStamp, lastWithdrawal: type.withdrawStamp})
+        }else{
+            res.status(400).json({message:'Error occured'})
+        }
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}))
+
 
 module.exports = router
