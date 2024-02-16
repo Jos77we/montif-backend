@@ -41,7 +41,7 @@ router.post("/new-transaction", asyncHandler(async(req, res) => {
 
 router.get("/all-transactions", asyncHandler(async(req, res) => {
     try {
-        const allTransactions = await transact.find({})
+        const allTransactions = await transact.find().sort({ createdAt: -1 });
         res.status(200).json(allTransactions)
         
     } catch (error) {
