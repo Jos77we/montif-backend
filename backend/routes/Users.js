@@ -1,6 +1,6 @@
 const express = require('express')
 const users = require('../model/UsersModel')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const {security} = require('../middleware/Authentification')
